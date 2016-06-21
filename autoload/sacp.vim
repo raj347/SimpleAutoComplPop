@@ -74,13 +74,20 @@ endfunction
 
 function sacp#feedPopup()
 
-	" NOTE: CursorMovedI is not triggered while the popup menu is visible. And
-	"       it will be triggered when popup menu is disappeared.
-	if b:lockCount > 0 || pumvisible() || &paste || (b:sacpCompleteDone==0)
+	if &paste
 		return ''
 	endif
 
-	let l:match = s:getFirstMatch()
+	" NOTE: CursorMovedI is not triggered while the popup menu is visible. And
+	"       it will be triggered when popup menu is disappeared.
+
+	if b:lockCount > 0
+		return ''
+	endif
+
+	let l:needIgnoreCompletionMode = pumvisible() || (b:sacpCompleteDone==0)
+
+	let l:match = s:getFirstMatch(l:needIgnoreCompletionMode)
 	if empty(l:match)
 		return ''
 	endif
@@ -108,7 +115,7 @@ function s:getCurrentText()
 	return strpart(getline('.'), 0, col('.') - 1)
 endfunction
 
-function s:getFirstMatch()
+function s:getFirstMatch(needIgnoreCompletionMode)
 
 	let l:text = s:getCurrentText()
 
@@ -118,6 +125,9 @@ function s:getFirstMatch()
 			if l:operator =~ '^[=~=!#]\{1,}$' " is operator
 				let l:r = eval("l:text ".l:operator." l:pattern")
 				if l:r == 1
+					if (a:needIgnoreCompletionMode==1) && get(l:m,"ignoreCompletionMode",0)==0
+						continue
+					endif
 					return l:m
 				endif
 			endif

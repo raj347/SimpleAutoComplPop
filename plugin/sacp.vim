@@ -47,7 +47,7 @@ if get(g:sacpDefaultFiltTypesEnable,'go',0) == 1
 
 	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
 				\ { '=~': '\v[a-zA-Z]{4}$' , 'feedkeys': "\<C-x>\<C-o>"} ,
-				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>"} ,
+				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>", "ignoreCompletionMode":1} ,
 				\ ]
 				\ })
 
