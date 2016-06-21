@@ -17,8 +17,8 @@ I'm a PHP developer, and currently I'm using neovim.
 - The origional [AutoComplPop](https://github.com/vim-scripts/AutoComplPop) is
 	a little bit complicated, and hard to extend for me.
 
-So I decided to create my own SimpleAutoComplPop, focus on easy to use, and
-easy to be extended for your own use cases. SimpleAutoComplPop maps keys on 
+Finally I decided to create my own SimpleAutoComplPop, focus on easy to use,
+and easy to be extended for your own use cases. SimpleAutoComplPop maps keys on
 a per-buffer basis, technically it will not conflict with other auto-complete
 plugin if you configure carefully. 
 
@@ -40,8 +40,19 @@ to for completion.
 
 Press `<TAB>` to select the popup menu.
 
-![demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_php_demo.jpg)
+![php_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_php_demo.jpg)
 
+## Golang
+
+```
+	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
+				\ { '=~': '\v[a-zA-Z]{4}$' , 'feedkeys': "\<C-x>\<C-o>"} ,
+				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>"} ,
+				\ ]
+				\ })
+```
+
+![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.jpg)
 
 ## Config
 
