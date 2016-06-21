@@ -38,6 +38,7 @@ to for completion.
 				\ })
 ```
 
+Demo with [phpcomplete.vim](https://github.com/shawncplus/phpcomplete.vim).
 Press `<TAB>` to select the popup menu.
 
 ![php_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_php_demo.jpg)
@@ -51,6 +52,8 @@ Press `<TAB>` to select the popup menu.
 				\ ]
 				\ })
 ```
+
+Demo with [vim-go](https://github.com/fatih/vim-go)
 
 ![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.jpg)
 
