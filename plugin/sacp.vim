@@ -46,7 +46,7 @@ endif
 " golang
 if get(g:sacpDefaultFiltTypesEnable,'go',0) == 1
 
-	" 1. variables are all devined in current scope, use keyword from current
+	" 1. variables are all defined in current scope, use keyword from current
 	" buffer for completion `<C-x><C-n>`
 	" 2. When the '.' is pressed, use smarter omnicomplete `<C-x><C-o>`, this
 	" works well with the vim-go plugin
@@ -60,15 +60,17 @@ endif
 
 
 " python
-" autocmd! FileType python call sacp#enableForThisBuffer({ "matches": [
+" autocmd FileType python call sacp#enableForThisBuffer({ "matches": [
 "                 \ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
 "                 \ { '=~': '\.$'           , 'feedkeys': "\<C-x>\<C-o>"},
 "                 \ ]
 "                 \ })
 " 
 
-autocmd! FileType markdown call sacp#enableForThisBuffer({ "matches": [
+" text markdown
+autocmd FileType text,markdown call sacp#enableForThisBuffer({ "matches": [
 			\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
 			\ { '=~': '\v[а-яА-Я]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
 			\ ]
 			\ })
+

@@ -46,9 +46,13 @@ Press `<TAB>` to select the popup menu.
 ## Golang
 
 ```
+	" 1. variables are all defined in current scope, use keyword from current
+	" buffer for completion `<C-x><C-n>`
+	" 2. When the '.' is pressed, use smarter omnicomplete `<C-x><C-o>`, this
+	" works well with the vim-go plugin
 	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
 				\ { '=~': '\v[a-zA-Z]{4}$' , 'feedkeys': "\<C-x>\<C-o>"} ,
-				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>"} ,
+				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>", "ignoreCompletionMode":1} ,
 				\ ]
 				\ })
 ```
@@ -62,4 +66,19 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
 - Disable SimpleAutoComplPop, add `let g:sacpEnable = 0` to your vimrc file.
 - Enable for php only, add `let g:sacpDefaultFiltTypesEnable = {"php":1}` to
 	your vimrc file.
+- `sacpDefaultFiltTypesEnable` options:
+    - `matches` is a list of patterns, if pattern is matched, the keys
+        corrosponding the pattern will be feed to vim.
+    - `ignoreCompletionMode`. Keys will not be feeded by SACP if vim is still
+        in completion mode (`:help CompleteDone`). However, some plugins does
+        not leave completion mode properly. With Current version of
+        [vim-go](https://github.com/fatih/vim-go) plugin for example, when I
+        type `htt<C-X><C-O>` it will popup a list containing `http`, then I
+        type `htt<C-X><C-O>p.`. When the `.` is typed the popup menu disapears,
+        but the event `CompleteDone` is not triggered. This would cause SACP
+        failed to feed `<C-X><C-O>` properly. set the `ignoreCompletionMode` to
+        `1` would fix this issue.
+    - `completeopt`, the default value option is
+        `menu,menuone,noinsert,noselect`, set it to `menu,menuone,noinsert` if
+        you want the first hit to be selected by default.
 

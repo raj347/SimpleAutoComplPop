@@ -20,7 +20,6 @@ function sacp#enableForThisBuffer(options)
 	let b:lockCount = 0
 	let b:options = copy(a:options)
 
-	let &l:complete    = get(a:options,'complete','.,w,t')
 	let &l:completeopt = get(a:options,'completeopt','menu,menuone,noinsert,noselect')
 	let b:keysMappingDriven = get(a:options,"keysMappingDriven",[
 				\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
