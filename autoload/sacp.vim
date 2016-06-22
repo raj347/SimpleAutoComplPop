@@ -13,8 +13,20 @@
 " call this funciton to enable auto complete pop
 function sacp#enableForThisBuffer(options)
 
+	if exists("b:options")
+		call sacp#unmapForMappingDriven()
+	endif
+
 	let b:lockCount = 0
 	let b:options = copy(a:options)
+	let b:keysMappingDriven = get(a:options,"keysMappingDriven",[
+				\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+				\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+				\ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+				\ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+				\ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+				\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
+				\ '<Space>', '<C-h>', '<BS>', ])
 
 	" setlocal complete=.,w,b,u,t
 	setlocal complete=.,w,t
@@ -30,15 +42,6 @@ function sacp#enableForThisBuffer(options)
 endfunction
 
 function sacp#bufferMapForMappingDriven()
-	call sacp#unmapForMappingDriven()
-	let b:keysMappingDriven = [
-				\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-				\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-				\ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-				\ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-				\ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-				\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
-				\ '<Space>', '<C-h>', '<BS>', ]
 	for key in b:keysMappingDriven
 		execute printf('inoremap <buffer> <silent> %s %s<C-r>=sacp#feedPopup()<CR>',
 					\        key, key)
@@ -50,7 +53,7 @@ function sacp#unmapForMappingDriven()
 		return
 	endif
 	for key in b:keysMappingDriven
-		execute 'iunmap <buffer> ' . key
+		execute 'silent! iunmap <buffer> ' . key
 	endfor
 	let b:keysMappingDriven = []
 endfunction
@@ -105,6 +108,7 @@ function sacp#feedPopup()
 	" call s:setTempOption(s:GROUP1, 'textwidth', 0)
 	" call s:setCompletefunc()
 
+	" call sacp#writeLog("feedkeys: " . l:match["=~"] . ":" )
 	call feedkeys(l:match.feedkeys, 'n')
 	let b:sacpCompleteDone = 0
 	return '' " this function is called by <C-r>=

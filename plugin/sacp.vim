@@ -58,3 +58,17 @@ if get(g:sacpDefaultFiltTypesEnable,'go',0) == 1
 
 endif
 
+
+" python
+" autocmd! FileType python call sacp#enableForThisBuffer({ "matches": [
+"                 \ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
+"                 \ { '=~': '\.$'           , 'feedkeys': "\<C-x>\<C-o>"},
+"                 \ ]
+"                 \ })
+" 
+
+autocmd! FileType markdown call sacp#enableForThisBuffer({ "matches": [
+			\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
+			\ { '=~': '\v[а-яА-Я]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
+			\ ]
+			\ })
