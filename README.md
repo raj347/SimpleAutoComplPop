@@ -75,7 +75,7 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
 
     - `ignoreCompletionMode`. Keys will not be feeded by SACP if vim is still
         in completion mode (`:help CompleteDone`). However, some plugins does
-        not leave completion mode properly. With Current version of
+        not leave completion mode properly. With current version of
         [vim-go](https://github.com/fatih/vim-go) plugin for example, when I
         type `htt<C-X><C-O>` it will popup a list containing `http`, then I
         type `htt<C-X><C-O>p.`. When the `.` is typed the popup menu disapears,
