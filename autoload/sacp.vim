@@ -19,6 +19,9 @@ function sacp#enableForThisBuffer(options)
 
 	let b:lockCount = 0
 	let b:options = copy(a:options)
+
+	let &l:complete    = get(a:options,'complete','.,w,t')
+	let &l:completeopt = get(a:options,'completeopt','menu,menuone,noinsert,noselect')
 	let b:keysMappingDriven = get(a:options,"keysMappingDriven",[
 				\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 				\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -28,10 +31,6 @@ function sacp#enableForThisBuffer(options)
 				\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
 				\ '<Space>', '<C-h>', '<BS>', ])
 
-	" setlocal complete=.,w,b,u,t
-	setlocal complete=.,w,t
-	setlocal completeopt=menu,menuone,noinsert,noselect
-	" ,longest
 
 	inoremap <expr> <buffer> <silent> <TAB>  pumvisible()?"\<C-n>":"\<TAB>"
 	inoremap <expr> <buffer> <silent> <S-TAB>  pumvisible()?"\<C-p>":"\<TAB>"
