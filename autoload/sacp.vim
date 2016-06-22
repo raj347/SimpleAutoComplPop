@@ -141,9 +141,65 @@ function s:getFirstMatch(needIgnoreCompletionMode)
 	return {}
 endfunction
 
+" function sacp#setupCacheFuzzyOmniComplete()
+" 	let b:originalLocalOmnifunc = &l:omnifunc
+" 	let b:originalOmnifunc      = &omnifunc
+" 	if b:originalLocalOmnifunc=="" && b:originalOmnifunc==""
+" 		return ""
+" 	let &l:omnifunc = 'sacp#cacheFuzzyOmniComplete'
+" 	return ''
+" endfunction
+" 
+" " wrapped omni func
+" function sacp#cacheFuzzyOmniComplete(findstart,base)
+" 
+" 	if a:findstart == 1
+" 
+" 		if b:originalLocalOmnifunc != ""
+" 			let b:completeStartColumn = call(b:originalLocalOmnifunc,[a:findstart,a:base])
+" 		else
+" 			let b:completeStartColumn = call(b:originalOmnifunc,[a:findstart,a:base])
+" 		endif
+" 		let b:completeCache = []
+" 		return b:completeStartColumn
+" 
+" 	else
+" 
+" 	" keep calling until returns error?
+" 
+" 		" read cached complete
+" 		if empty(b:completeCache)
+" 			if b:originalLocalOmnifunc != ""
+" 				let b:completeCache = call(b:originalLocalOmnifunc,[a:findstart,a:base])
+" 			else
+" 				let b:ompleteCache = call(b:originalOmnifunc,[a:findstart,a:base])
+" 			endif
+" 		endif
+" 
+" 		let l:ret = []
+" 
+" 		" filter return result
+" 		let l:typedWord = strpart(getline('.'), b:completeStartColumn, col('.') - 1)
+" 
+" 	endif
+" 
+" endfunction
+
 function sacp#setCompleteDone()
+	" call sacp#writeLog('sacp#setCompleteDone') " debug
 	let b:sacpCompleteDone=1
+
+	" restore omni func, destroys variables
+	if &l:omnifunc =~ '^sacp#'
+		let &l:omnifunc = b:originalLocalOmnifunc
+		let &omnifunc   = b:originalOmnifunc
+		unlet b:originalLocalOmnifunc
+		unlet b:originalOmnifunc
+		unlet b:completeStartColumn
+		unlet b:completeCache
+	endif
+
 endfunction
 
-autocmd CompleteDone,InsertEnter,InsertLeave * call sacp#setCompleteDone()
+autocmd InsertEnter,CompleteDone * call sacp#setCompleteDone()
 

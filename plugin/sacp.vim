@@ -5,6 +5,7 @@ if g:sacpEnable == 0
 	finish
 endif
 
+inoremap <expr> <silent> <Plug>(sacp_cache_fuzzy_omnicomplete)  sacp#setupCacheFuzzyOmniComplete()."\<C-X>\<C-O>"
 
 let s:sacpDefaultFiltTypesEnable = { "php":1, "markdown":1, "text":1, "go":1}
 let g:sacpDefaultFiltTypesEnable = get(g:,'sacpDefaultFiltTypesEnable',s:sacpDefaultFiltTypesEnable)
@@ -45,8 +46,12 @@ endif
 " golang
 if get(g:sacpDefaultFiltTypesEnable,'go',0) == 1
 
+	" 1. variables are all devined in current scope, use keyword from current
+	" buffer for completion `<C-x><C-n>`
+	" 2. When the '.' is pressed, use smarter omnicomplete `<C-x><C-o>`, this
+	" works well with the vim-go plugin
 	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{4}$' , 'feedkeys': "\<C-x>\<C-o>"} ,
+				\ { '=~': '\v[a-zA-Z]{2}$' , 'feedkeys': "\<C-x>\<C-n>"} ,
 				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>", "ignoreCompletionMode":1} ,
 				\ ]
 				\ })
