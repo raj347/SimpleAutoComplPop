@@ -64,8 +64,8 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
 ## Config
 
 - Disable SimpleAutoComplPop, add `let g:sacpEnable = 0` to your vimrc file.
-- Enable for php only, add `let g:sacpDefaultFiltTypesEnable = {"php":1}` to
-	your vimrc file.
+- To enable the default auto-complete-popup for php only, add `let
+    g:sacpDefaultFiltTypesEnable = {"php":1}` to your vimrc file.
 - `sacpDefaultFiltTypesEnable` options:
     - `matches` is a list of patterns, if pattern is matched, the keys
         corrosponding the pattern will be feed to vim.
