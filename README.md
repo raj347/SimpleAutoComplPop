@@ -24,6 +24,13 @@ and easy to be extended for your own use cases. SimpleAutoComplPop maps keys on
 a per-buffer basis, technically it will not conflict with other auto-complete
 plugin if you configure carefully. 
 
+As a lightweight plugin, the [default auto-complete-popup
+behavior](plugin/sacp.vim) provideed by this plugin only covers `.php`, `.txt`,
+`.markdown`, and `.go` files, for demonstration purpose.  If you have a good
+configuration to share, please send me a gist url or a your github repo url,
+I'll add it into this README.md or probably created a wiki page for nice
+configurations for other filetypes.
+
 # Usage
 
 ## PHP
