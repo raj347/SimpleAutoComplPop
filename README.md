@@ -83,26 +83,26 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
 - To enable the default auto-complete-popup behavior for php only, add `let
     g:sacpDefaultFileTypesEnable = {"php":1}` to your vimrc file.
 
-- `sacp#enableForThisBuffer` options: 
+- **sacp#enableForThisBuffer** options: 
 
-    - `matches` is a list of patterns, pattern is matched, the keys
+    - **matches** is a list of patterns, pattern is matched, the keys
         corrosponding the pattern will be feed to vim.
 
-    - `ignoreCompletionMode`. Keys will not be feeded by SACP if vim is still
-        in completion mode (`:help CompleteDone`). However, some plugins does
-        not leave completion mode properly. With current version of
-        [vim-go](https://github.com/fatih/vim-go) plugin for example, when I
+    - **ignoreCompletionMode**. By default, Keys will not be feeded by SACP if
+        vim is still in completion mode (`:help CompleteDone`). However, some
+        plugins does not leave completion mode properly. With current version
+        of [vim-go](https://github.com/fatih/vim-go) plugin for example, when I
         type `htt<C-X><C-O>` it will popup a list containing `http`, then I
         type `htt<C-X><C-O>p.`. When the `.` is typed the popup menu disapears,
         but the event `CompleteDone` is not triggered. This would cause SACP
         failed to feed `<C-X><C-O>` properly. set the `ignoreCompletionMode` to
         `1` would fix this issue.
 
-    - `completeopt`, the default value for this option is
+    - **completeopt**, the default value for this option is
         `"menu,menuone,noinsert,noselect"`, set it to `"menu,menuone,noinsert"`
         if you want the first hint to be selected by default.
 
-    - `inoremap`, a list of characters to be `inoremap`ed by SACP to
+    - **inoremap**, a list of characters to be `inoremap`ed by SACP to
         check for matches, default value is `[ 'a', 'b', 'c', 'd', 'e', 'f',
         'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
         'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
