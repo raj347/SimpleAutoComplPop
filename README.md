@@ -63,11 +63,11 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
 
 ![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.gif)
 
-## Config
+## Configiration Options Explained
 
-- Disable SimpleAutoComplPop, add `let g:sacpEnable = 0` to your vimrc file.
+- To disable SimpleAutoComplPop, add `let g:sacpEnable = 0` to your vimrc file.
 
-- To enable the default auto-complete-popup for php only, add `let
+- To enable the default auto-complete-popup behavior for php only, add `let
     g:sacpDefaultFileTypesEnable = {"php":1}` to your vimrc file.
 
 - `sacp#enableForThisBuffer` options: 
