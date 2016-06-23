@@ -27,7 +27,7 @@ endif
 if get(g:sacpDefaultFileTypesEnable,'markdown',0) == 1
 
 	autocmd FileType markdown call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{3}$', 'feedkeys': "\<C-n>"},
+				\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
 				\ ]
 				\ })
 
@@ -37,7 +37,7 @@ endif
 if get(g:sacpDefaultFileTypesEnable,'text',0) == 1
 
 	autocmd FileType text call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{3}$', 'feedkeys': "\<C-n>"},
+				\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
 				\ ]
 				\ })
 
@@ -58,19 +58,4 @@ if get(g:sacpDefaultFileTypesEnable,'go',0) == 1
 
 endif
 
-
-" python
-" autocmd FileType python call sacp#enableForThisBuffer({ "matches": [
-"                 \ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
-"                 \ { '=~': '\.$'           , 'feedkeys': "\<C-x>\<C-o>"},
-"                 \ ]
-"                 \ })
-" 
-
-" text markdown
-autocmd FileType text,markdown call sacp#enableForThisBuffer({ "matches": [
-			\ { '=~': '\v[a-zA-Z]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
-			\ { '=~': '\v[а-яА-Я]{2}$', 'feedkeys': "\<C-x>\<C-n>"},
-			\ ]
-			\ })
 
