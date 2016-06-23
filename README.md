@@ -89,7 +89,7 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
         `menu,menuone,noinsert,noselect`, set it to `menu,menuone,noinsert` if
         you want the first hit to be selected by default.
 
-    - `keysMappingDriven`, a list of characters to be `inoremap`ed by SACP to
+    - `inoremap`, a list of characters to be `inoremap`ed by SACP to
         check for matches, default value is `[ 'a', 'b', 'c', 'd', 'e', 'f',
         'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
         'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',

@@ -21,7 +21,7 @@ function sacp#enableForThisBuffer(options)
 	let b:options = copy(a:options)
 
 	let &l:completeopt = get(a:options,'completeopt','menu,menuone,noinsert,noselect')
-	let b:keysMappingDriven = get(a:options,"keysMappingDriven",[
+	let b:keysMappingDriven = get(a:options,"inoremap",[
 				\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 				\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 				\ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
