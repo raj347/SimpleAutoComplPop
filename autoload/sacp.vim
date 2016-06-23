@@ -209,5 +209,5 @@ function sacp#setCompleteDone()
 
 endfunction
 
-autocmd InsertEnter,CompleteDone * call sacp#setCompleteDone()
+autocmd InsertLeave,CompleteDone * call sacp#setCompleteDone()
 
