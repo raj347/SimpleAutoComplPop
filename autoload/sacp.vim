@@ -205,6 +205,8 @@ function sacp#setCompleteDone()
 		unlet b:completeCache
 	endif
 
+	return ''
+
 endfunction
 
 autocmd InsertEnter,CompleteDone * call sacp#setCompleteDone()
