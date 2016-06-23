@@ -30,9 +30,10 @@ function sacp#enableForThisBuffer(options)
 				\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
 				\ '<Space>', '<C-h>', '<BS>', ])
 
-	" supress the anoying messages like '-- Keyword completion (^N^P)' when
-	" press '<C-n>' key
-	setlocal shortmess+=c
+	" Supress the anoying messages like '-- Keyword completion (^N^P)' when
+	" press '<C-n>' key. This option is only supported after vim 7.4.314 
+	" https://groups.google.com/forum/#!topic/vim_dev/WeBBjkXE8H8
+	silent! setlocal shortmess+=c
 
 	inoremap <expr> <buffer> <silent> <TAB>  pumvisible()?"\<C-n>":"\<TAB>"
 	inoremap <expr> <buffer> <silent> <S-TAB>  pumvisible()?"\<C-p>":"\<TAB>"
