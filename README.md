@@ -13,8 +13,9 @@ I'm a PHP developer, and currently I'm using neovim.
     [phpcomplete-extended](https://github.com/m2mdas/phpcomplete-extended).
     But phpcomplete_extended seems to be unmaintained right now, the latest
     comment is from two years ago.~~
-- [YCM](https://github.com/Valloric/YouCompleteMe) is really great. It's just a
-	little bit heavy for me.
+- [YCM](https://github.com/Valloric/YouCompleteMe) is really a great one. But
+    It's just too heavy for me, it significantly slows down my vim's startup
+    time.
 - The origional [AutoComplPop](https://github.com/vim-scripts/AutoComplPop) is
 	a little bit complicated, and hard to extend for me.
 
