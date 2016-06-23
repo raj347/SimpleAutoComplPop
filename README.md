@@ -59,6 +59,10 @@ Press `<TAB>` to select the popup menu.
 				\ })
 ```
 
+The special character `.` need `ignoreCompletionMode` to be set to work with
+[vim-go](https://github.com/fatih/vim-go), see the
+[#configiration-options-explained] for more details.
+
 Demo with [vim-go](https://github.com/fatih/vim-go)
 
 ![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.gif)
