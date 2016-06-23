@@ -8,11 +8,11 @@ I'm a PHP developer, and currently I'm using neovim.
 
 - [Neocomplete](https://github.com/Shougo/neocomplete.vim) needs `if_lua`,
 	which is not possible with neovim currently.
-- ~~~With [deoplete](https://github.com/Shougo/deoplete.nvim) framework,
+- ~~With [deoplete](https://github.com/Shougo/deoplete.nvim) framework,
     currently the only option is
     [phpcomplete-extended](https://github.com/m2mdas/phpcomplete-extended).
     But phpcomplete_extended seems to be unmaintained right now, the latest
-    comment is from two years ago.~~~
+    comment is from two years ago.~~
 - [YCM](https://github.com/Valloric/YouCompleteMe) is really great. It's just a
 	little bit heavy for me.
 - The origional [AutoComplPop](https://github.com/vim-scripts/AutoComplPop) is
