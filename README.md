@@ -18,6 +18,7 @@ I'm a PHP developer, and currently I'm using neovim.
     time.
 - The origional [AutoComplPop](https://github.com/vim-scripts/AutoComplPop) is
 	a little bit complicated, and hard to extend for me.
+- I know I'm re-inventing the wheel but I just couldn't stop it :joy:
 
 Finally I decided to create my own SimpleAutoComplPop, focus on easy to use,
 and easy to be extended for your own use cases. SimpleAutoComplPop maps keys on
