@@ -17,8 +17,10 @@ function sacp#enableForThisBuffer(options)
 		call sacp#unmapForMappingDriven()
 	endif
 
-	let b:lockCount = 0
-	let b:options = copy(a:options)
+	let b:sacpCompleteDone = 1
+	let b:sacpLockCount    = 0
+
+	let b:options          = copy(a:options)
 
 	let &l:completeopt = get(a:options,'completeopt','menu,menuone,noinsert,noselect')
 	let b:keysMappingDriven = get(a:options,"inoremap",[
@@ -61,14 +63,14 @@ function sacp#unmapForMappingDriven()
 endfunction
 
 function sacp#lock()
-	let b:lockCount = get(b:,'lockCount',0);
-	let b:lockCount += 1
+	let b:sacpLockCount = get(b:,'sacpLockCount',0);
+	let b:sacpLockCount += 1
 endfunction
 
 function sacp#unlock()
-	let b:lockCount -= 1
-	if b:lockCount < 0
-		let b:lockCount = 0
+	let b:sacpLockCount -= 1
+	if b:sacpLockCount < 0
+		let b:sacpLockCount = 0
 		throw "AutoComplPop: not locked"
 	endif
 endfunction
@@ -86,14 +88,14 @@ function sacp#feedPopup()
 	" NOTE: CursorMovedI is not triggered while the popup menu is visible. And
 	"       it will be triggered when popup menu is disappeared.
 
-	if b:lockCount > 0
+	if b:sacpLockCount > 0
 		return ''
 	endif
 
 	let l:needIgnoreCompletionMode = pumvisible() || (b:sacpCompleteDone==0)
 
-	let l:match = s:getFirstMatch(l:needIgnoreCompletionMode)
-	if empty(l:match)
+	let b:sacpMatch = s:getFirstMatch(l:needIgnoreCompletionMode)
+	if empty(b:sacpMatch)
 		return ''
 	endif
 
@@ -110,9 +112,8 @@ function sacp#feedPopup()
 	" call s:setTempOption(s:GROUP1, 'textwidth', 0)
 	" call s:setCompletefunc()
 
-	" call sacp#writeLog("feedkeys: " . l:match["=~"] . ":" )
-	call feedkeys(l:match.feedkeys, 'n')
 	let b:sacpCompleteDone = 0
+	call feedkeys(b:sacpMatch.feedkeys)
 	return '' " this function is called by <C-r>=
 
 endfunction
@@ -139,74 +140,16 @@ function s:getFirstMatch(needIgnoreCompletionMode)
 			endif
 		endfo
 
-		" if call(l:b.meets,[text]) == 1
-		" 	return l:b
-		" endif
 	endfor
 
 	return {}
 endfunction
 
-" function sacp#setupCacheFuzzyOmniComplete()
-" 	let b:originalLocalOmnifunc = &l:omnifunc
-" 	let b:originalOmnifunc      = &omnifunc
-" 	if b:originalLocalOmnifunc=="" && b:originalOmnifunc==""
-" 		return ""
-" 	let &l:omnifunc = 'sacp#cacheFuzzyOmniComplete'
-" 	return ''
-" endfunction
-" 
-" " wrapped omni func
-" function sacp#cacheFuzzyOmniComplete(findstart,base)
-" 
-" 	if a:findstart == 1
-" 
-" 		if b:originalLocalOmnifunc != ""
-" 			let b:completeStartColumn = call(b:originalLocalOmnifunc,[a:findstart,a:base])
-" 		else
-" 			let b:completeStartColumn = call(b:originalOmnifunc,[a:findstart,a:base])
-" 		endif
-" 		let b:completeCache = []
-" 		return b:completeStartColumn
-" 
-" 	else
-" 
-" 	" keep calling until returns error?
-" 
-" 		" read cached complete
-" 		if empty(b:completeCache)
-" 			if b:originalLocalOmnifunc != ""
-" 				let b:completeCache = call(b:originalLocalOmnifunc,[a:findstart,a:base])
-" 			else
-" 				let b:ompleteCache = call(b:originalOmnifunc,[a:findstart,a:base])
-" 			endif
-" 		endif
-" 
-" 		let l:ret = []
-" 
-" 		" filter return result
-" 		let l:typedWord = strpart(getline('.'), b:completeStartColumn, col('.') - 1)
-" 
-" 	endif
-" 
-" endfunction
-
 function sacp#setCompleteDone()
 	" call sacp#writeLog('sacp#setCompleteDone') " debug
 	let b:sacpCompleteDone=1
-
-	" restore omni func, destroys variables
-	if &l:omnifunc =~ '^sacp#'
-		let &l:omnifunc = b:originalLocalOmnifunc
-		let &omnifunc   = b:originalOmnifunc
-		unlet b:originalLocalOmnifunc
-		unlet b:originalOmnifunc
-		unlet b:completeStartColumn
-		unlet b:completeCache
-	endif
-
+	silent! unlet b:sacpMatch
 	return ''
-
 endfunction
 
 autocmd InsertLeave,CompleteDone * call sacp#setCompleteDone()
