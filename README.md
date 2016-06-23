@@ -98,9 +98,9 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
         failed to feed `<C-X><C-O>` properly. set the `ignoreCompletionMode` to
         `1` would fix this issue.
 
-    - `completeopt`, the default value option is
-        `menu,menuone,noinsert,noselect`, set it to `menu,menuone,noinsert` if
-        you want the first hit to be selected by default.
+    - `completeopt`, the default value for this option is
+        `"menu,menuone,noinsert,noselect"`, set it to `"menu,menuone,noinsert"`
+        if you want the first hint to be selected by default.
 
     - `inoremap`, a list of characters to be `inoremap`ed by SACP to
         check for matches, default value is `[ 'a', 'b', 'c', 'd', 'e', 'f',
