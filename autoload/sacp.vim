@@ -30,6 +30,9 @@ function sacp#enableForThisBuffer(options)
 				\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
 				\ '<Space>', '<C-h>', '<BS>', ])
 
+	" supress the anoying messages like '-- Keyword completion (^N^P)' when
+	" press '<C-n>' key
+	setlocal shortmess+=c
 
 	inoremap <expr> <buffer> <silent> <TAB>  pumvisible()?"\<C-n>":"\<TAB>"
 	inoremap <expr> <buffer> <silent> <S-TAB>  pumvisible()?"\<C-p>":"\<TAB>"
