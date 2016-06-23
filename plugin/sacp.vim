@@ -7,11 +7,11 @@ endif
 
 inoremap <expr> <silent> <Plug>(sacp_cache_fuzzy_omnicomplete)  sacp#setupCacheFuzzyOmniComplete()."\<C-X>\<C-O>"
 
-let s:sacpDefaultFiltTypesEnable = { "php":1, "markdown":1, "text":1, "go":1}
-let g:sacpDefaultFiltTypesEnable = get(g:,'sacpDefaultFiltTypesEnable',s:sacpDefaultFiltTypesEnable)
+let s:sacpDefaultFileTypesEnable = { "php":1, "markdown":1, "text":1, "go":1}
+let g:sacpDefaultFileTypesEnable = get(g:,'sacpDefaultFileTypesEnable',s:sacpDefaultFileTypesEnable)
 
 " php
-if get(g:sacpDefaultFiltTypesEnable,'php',0) == 1
+if get(g:sacpDefaultFileTypesEnable,'php',0) == 1
 
 	" TODO auto filename completion pop up, for './'  '/' '../'
 	autocmd FileType php,php5,php7 call sacp#enableForThisBuffer({ "matches": [
@@ -24,7 +24,7 @@ if get(g:sacpDefaultFiltTypesEnable,'php',0) == 1
 endif
 
 " .md files
-if get(g:sacpDefaultFiltTypesEnable,'markdown',0) == 1
+if get(g:sacpDefaultFileTypesEnable,'markdown',0) == 1
 
 	autocmd FileType markdown call sacp#enableForThisBuffer({ "matches": [
 				\ { '=~': '\v[a-zA-Z]{3}$', 'feedkeys': "\<C-n>"},
@@ -34,7 +34,7 @@ if get(g:sacpDefaultFiltTypesEnable,'markdown',0) == 1
 endif
 
 " .txt files
-if get(g:sacpDefaultFiltTypesEnable,'text',0) == 1
+if get(g:sacpDefaultFileTypesEnable,'text',0) == 1
 
 	autocmd FileType text call sacp#enableForThisBuffer({ "matches": [
 				\ { '=~': '\v[a-zA-Z]{3}$', 'feedkeys': "\<C-n>"},
@@ -44,7 +44,7 @@ if get(g:sacpDefaultFiltTypesEnable,'text',0) == 1
 endif
 
 " golang
-if get(g:sacpDefaultFiltTypesEnable,'go',0) == 1
+if get(g:sacpDefaultFileTypesEnable,'go',0) == 1
 
 	" 1. variables are all defined in current scope, use keyword from current
 	" buffer for completion `<C-x><C-n>`
