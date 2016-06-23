@@ -59,8 +59,8 @@ Press `<TAB>` to select the popup menu.
 				\ })
 ```
 
-The special character `.` need `ignoreCompletionMode` to be set to work with
-[vim-go](https://github.com/fatih/vim-go), see the
+The special dot character `.` need `ignoreCompletionMode` to be set to work
+with [vim-go](https://github.com/fatih/vim-go), see the
 [#configiration-options-explained] for more details.
 
 Demo with [vim-go](https://github.com/fatih/vim-go)
