@@ -123,9 +123,9 @@ Check the [Advanced Features](#advanced-features) section For more information.
 
 ## Advanced Features
 
-There're some advanced features based on SimpleAutoComplPop's lightweight core.
-Check it out if you are interested. They will not be loaded into vim if you
-don't use them.
+I'm planning on add some advanced features based on SimpleAutoComplPop's
+lightweight core, while these features will not be loaded into vim if you don't
+use them.
 
 ### `<Plug>(sacp_cache_fuzzy_omnicomplete)`
 
