@@ -13,14 +13,14 @@
 " call this funciton to enable auto complete pop
 function sacp#enableForThisBuffer(options)
 
-	if exists("b:options")
+	if exists("b:sacpOptions")
 		call sacp#unmapForMappingDriven()
 	endif
 
 	let b:sacpCompleteDone = 1
 	let b:sacpLockCount    = 0
 
-	let b:options          = copy(a:options)
+	let b:sacpOptions          = copy(a:options)
 
 	let &l:completeopt = get(a:options,'completeopt','menu,menuone,noinsert,noselect')
 	let b:keysMappingDriven = get(a:options,"inoremap",[
@@ -126,7 +126,7 @@ function s:getFirstMatch(needIgnoreCompletionMode)
 
 	let l:text = s:getCurrentText()
 
-	for l:m in b:options['matches']
+	for l:m in b:sacpOptions['matches']
 
 		for [l:operator,l:pattern] in items(l:m)
 			if l:operator =~ '^[=~=!#]\{1,}$' " is operator
