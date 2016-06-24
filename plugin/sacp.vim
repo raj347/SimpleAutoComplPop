@@ -5,7 +5,8 @@ if g:sacpEnable == 0
 	finish
 endif
 
-inoremap <expr> <silent> <Plug>(sacp_cache_fuzzy_omnicomplete)  sacp#setupCacheFuzzyOmniComplete()."\<C-X>\<C-O>"
+inoremap <expr> <silent> <Plug>(sacp_set_complete_done)        sacp#setCompleteDone()
+inoremap <expr> <silent> <Plug>(sacp_cache_fuzzy_omnicomplete)  sacpomni#setup()
 
 let s:sacpDefaultFileTypesEnable = { "php":1, "markdown":1, "text":1, "go":1}
 let g:sacpDefaultFileTypesEnable = get(g:,'sacpDefaultFileTypesEnable',s:sacpDefaultFileTypesEnable)
@@ -15,7 +16,7 @@ if get(g:sacpDefaultFileTypesEnable,'php',0) == 1
 
 	" TODO auto filename completion pop up, for './'  '/' '../'
 	autocmd FileType php,php5,php7 call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{4}$', 'feedkeys': "\<C-x>\<C-o>"},
+				\ { '=~': '\v[a-zA-Z]{4}$', 'feedkeys': "\<Plug>(sacp_cache_fuzzy_omnicomplete)"},
 				\ { '=~': '::$'           , 'feedkeys': "\<C-x>\<C-o>"},
 				\ { '=~': '->$'           , 'feedkeys': "\<C-x>\<C-o>"},
 				\ ]
@@ -52,7 +53,7 @@ if get(g:sacpDefaultFileTypesEnable,'go',0) == 1
 	" works well with the vim-go plugin
 	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
 				\ { '=~': '\v[a-zA-Z]{2}$' , 'feedkeys': "\<C-x>\<C-n>"} ,
-				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>", "ignoreCompletionMode":1} ,
+				\ { '=~': '\.$'            , 'feedkeys': "\<Plug>(sacp_cache_fuzzy_omnicomplete)", "ignoreCompletionMode":1} ,
 				\ ]
 				\ })
 

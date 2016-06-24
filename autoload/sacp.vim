@@ -30,7 +30,7 @@ function sacp#enableForThisBuffer(options)
 				\ 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 				\ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 				\ '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<', '>', '/', '\',
-				\ '<Space>', '<C-h>', '<BS>', ])
+				\ '<Space>', '<C-h>', '<C-w>', '<BS>', ])
 
 	" Supress the anoying messages like '-- Keyword completion (^N^P)' when
 	" press '<C-n>' key. This option is only supported after vim 7.4.314 
@@ -63,7 +63,7 @@ function sacp#unmapForMappingDriven()
 endfunction
 
 function sacp#lock()
-	let b:sacpLockCount = get(b:,'sacpLockCount',0);
+	let b:sacpLockCount = get(b:,'sacpLockCount',0)
 	let b:sacpLockCount += 1
 endfunction
 

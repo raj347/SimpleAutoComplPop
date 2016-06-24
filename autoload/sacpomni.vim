@@ -18,12 +18,15 @@ function! sacpomni#setup()
 	let &l:omnifunc = 'sacpomni#complete'
 
 	silent! unlet b:sacpomniCompleteCache
-	let b:sacpomniCompleteStartColumn = 0
+	silent! unlet b:sacpomniCompleteStartColumn
 	let b:sacpomniInitialBase = ""
 
 	augroup sacpomni
 		autocmd InsertLeave,CompleteDone * call s:done()
 	augroup END
+
+	" Avoid setup to be called again when backspace is pressed, for example 'http.st<BS><BS>' .
+	call sacp#lock()
 
 	return "\<C-X>\<C-O>"
 
@@ -32,14 +35,17 @@ endfunction
 
 function! s:done()
 
-	" call sacp#writeLog('sacpomni#done') " debug
+	" call sacp#writeLog('done') " debug
 
 	" restore omni func, destroys variables
-	silent! let &l:omnifunc = b:sacpomniLFunc
+	silent! let &l:omnifunc = get(b:,'sacpomniLFunc','')
 	silent! unlet b:sacpomniLFunc
 	silent! unlet b:sacpomniFunc
 	silent! unlet b:sacpomniCompleteStartColumn
 	silent! unlet b:sacpomniCompleteCache
+	silent! unlet b:sacpomniInitialBase
+
+	call sacp#unlock()
 
 	" clear the group
 	augroup sacpomni
@@ -56,6 +62,10 @@ function! sacpomni#complete(findstart,base)
 
 	" first call
 	if a:findstart == 1
+		" return the old base if vim calls here again
+		if exists('b:sacpomniCompleteStartColumn')
+			return b:sacpomniCompleteStartColumn
+		endif
 		if b:sacpomniLFunc != ""
 			let b:sacpomniCompleteStartColumn = call(b:sacpomniLFunc,[a:findstart,a:base])
 		else
@@ -84,24 +94,41 @@ function! sacpomni#complete(findstart,base)
 	let l:retlist = []
 	let l:begin = len(b:sacpomniInitialBase)
 	for l:w in b:sacpomniCompleteCache
-		let l:m = g:WordMatchInfo(l:begin,a:base,l:w.word)
+		let l:m = s:WordMatchInfo(l:begin,a:base,l:w.word)
 		if empty(l:m)
 			" call sacp#writeLog("[" . l:w.word . "] does not match base:".a:base) " debug
 			continue
 		endif
 		" call sacp#writeLog("[" . l:w.word . "] match base:".a:base) " debug
 		let l:w.sacpomni_match = l:m
-		let l:w.refresh = 'always'
 		let l:retlist += [l:w]
 	endfor
+
+	call sort(l:retlist,function('s:sortWords'))
 
 	return { "words":l:retlist, "refresh": "always"}
 
 endfunction
 
+function s:sortWords(w1,w2)
+	if (a:w1.sacpomni_match.max-a:w1.sacpomni_match.min) < (a:w2.sacpomni_match.max-a:w2.sacpomni_match.min)
+		return -1
+	endif
+	if (a:w1.sacpomni_match.max-a:w1.sacpomni_match.min) > (a:w2.sacpomni_match.max-a:w2.sacpomni_match.min)
+		return 1
+	endif
+	if (a:w1.sacpomni_match.min) < (a:w2.sacpomni_match.min)
+		return -1
+	endif
+	if (a:w1.sacpomni_match.min) > (a:w2.sacpomni_match.min)
+		return 1
+	endif
+	return 1
+endfunction
+
 " if doesnot match, return empty dict
 " (2,'heol','helloworld') returns {4,8} 'ol' match 'oworl', 2 meas initial base is 'he', omitted for the match
-function! g:WordMatchInfo(begin,base,word)
+function! s:WordMatchInfo(begin,base,word)
 	let l:lb = len(a:base)
 	let l:lw = len(a:word)
 	let l:i = a:begin
