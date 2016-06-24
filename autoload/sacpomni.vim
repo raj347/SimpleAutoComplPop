@@ -153,6 +153,7 @@ function! s:WordMatchInfo(begin,base,word)
 				if l:i==l:lb-1
 					let l:max = l:j
 				endif
+				let l:j+=1
 				break
 			endif
 			let l:j+=1
