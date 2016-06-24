@@ -77,9 +77,9 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
 
 ![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.gif)
 
-The demo looks ok. While SimpleAutoComplPop provide a slightly improved plugin
-key
-[`<Plug>(sacp_cache_fuzzy_omnicomplete)`](#plugsacp_cache_fuzzy_omnicomplete).
+The demo looks ok. However SimpleAutoComplPop provide **a slightly improved
+plugin key
+[`<Plug>(sacp_cache_fuzzy_omnicomplete)`](#plugsacp_cache_fuzzy_omnicomplete)**.
 Check the [Advanced Features](#advanced-features) section For more information.
 
 
