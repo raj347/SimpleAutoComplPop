@@ -123,6 +123,10 @@ Check the [Advanced Features](#advanced-features) section For more information.
 
 ## Advanced Features
 
+There're some advanced features based on SimpleAutoComplPop's lightweight core.
+Check it out if you are interested. They will not be loaded into vim if you
+don't use them.
+
 ### `<Plug>(sacp_cache_fuzzy_omnicomplete)`
 
 Use the golang example before, I'll change the `\<C-x>\<C-o>` into
