@@ -127,7 +127,7 @@ Check the [Advanced Features](#advanced-features) section For more information.
 
 Use the golang example before, I'll change the `\<C-x>\<C-o>` into
 `\<Plug>(sacp_cache_fuzzy_omnicomplete)`. This key is based on user's default
-oomnifunc, it catches the first list return by omnifunc, then provide fuzzy
+omnifunc, it catches the first list return by omnifunc, then provide fuzzy
 completion feature.
 
 ```
