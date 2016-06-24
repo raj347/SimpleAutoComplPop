@@ -22,7 +22,7 @@ function! sacpomni#setup()
 	let b:sacpomniInitialBase = ""
 
 	augroup sacpomni
-		autocmd InsertLeave,CompleteDone * call s:done()
+		autocmd InsertEnter,InsertLeave,CompleteDone * call s:done()
 	augroup END
 
 	" Avoid setup to be called again when backspace is pressed, for example 'http.st<BS><BS>' .

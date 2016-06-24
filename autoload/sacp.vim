@@ -23,7 +23,7 @@ function sacp#enableForThisBuffer(options)
 	let b:sacpOptions          = copy(a:options)
 
 	let &l:completeopt = get(a:options,'completeopt','menu,menuone,noinsert,noselect')
-	let b:keysMappingDriven = get(a:options,"inoremap",[
+	let b:sacpInoremap = get(a:options,"inoremap",[
 				\ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 				\ 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 				\ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -46,20 +46,20 @@ function sacp#enableForThisBuffer(options)
 endfunction
 
 function sacp#bufferMapForMappingDriven()
-	for key in b:keysMappingDriven
+	for key in b:sacpInoremap
 		execute printf('inoremap <buffer> <silent> %s %s<C-r>=sacp#feedPopup()<CR>',
 					\        key, key)
 	endfor
 endfunction
 
 function sacp#unmapForMappingDriven()
-	if !exists('b:keysMappingDriven')
+	if !exists('b:sacpInoremap')
 		return
 	endif
-	for key in b:keysMappingDriven
+	for key in b:sacpInoremap
 		execute 'silent! iunmap <buffer> ' . key
 	endfor
-	let b:keysMappingDriven = []
+	let b:sacpInoremap = []
 endfunction
 
 function sacp#lock()
@@ -152,5 +152,5 @@ function sacp#setCompleteDone()
 	return ''
 endfunction
 
-autocmd InsertLeave,CompleteDone * call sacp#setCompleteDone()
+autocmd InsertEnter,InsertLeave,CompleteDone * call sacp#setCompleteDone()
 
