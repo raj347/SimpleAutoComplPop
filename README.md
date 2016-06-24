@@ -75,11 +75,13 @@ details.
 
 Demo with [vim-go](https://github.com/fatih/vim-go)
 
-The demo looks ok. While SimpleAutoComplPop provide a slightly improved plugin
-key `<Plug>(sacp_cache_fuzzy_omnicomplete)`, it is based on the user's defined
-omnicomplete, but provide fuzzy complete feature.
-
 ![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.gif)
+
+The demo looks ok. While SimpleAutoComplPop provide a slightly improved plugin
+key
+[`<Plug>(sacp_cache_fuzzy_omnicomplete)`](#plugsacp_cache_fuzzy_omnicomplete).
+Check the [Advanced Features](#advanced-features) section For more information.
+
 
 ## Configiration Options Explained
 
@@ -124,7 +126,9 @@ omnicomplete, but provide fuzzy complete feature.
 ### `<Plug>(sacp_cache_fuzzy_omnicomplete)`
 
 Use the golang example before, I'll change the `\<C-x>\<C-o>` into
-`\<Plug>(sacp_cache_fuzzy_omnicomplete)`
+`\<Plug>(sacp_cache_fuzzy_omnicomplete)`. This key is based on user's default
+oomnifunc, it catches the first list return by omnifunc, then provide fuzzy
+completion feature.
 
 ```
 	" 1. variables are all defined in current scope, use keyword from current
