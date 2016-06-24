@@ -20,12 +20,13 @@ I'm a PHP developer, and currently I'm using neovim.
 	a little bit complicated, and hard to extend for me.
 - I know I would be re-inventing the wheel but I just couldn't stop it :joy:
 
-Finally I decided to create my own SimpleAutoComplPop, focus on easy to use,
-and easy to be extended for your own use cases. SimpleAutoComplPop maps keys on
-a per-buffer basis, technically it will not conflict with other auto-complete
-plugin if you configure carefully. 
+Finally I decided to create my own SimpleAutoComplPop, focus on **easy to
+use**, and **easy to be extended** for your own use cases. SimpleAutoComplPop
+is **pure vimscript**, and it **maps keys on a per-buffer basis**. Technically
+it will not conflict with other auto-complete plugin if you configure
+carefully. 
 
-As a lightweight plugin, the [default auto-complete-popup
+As a **lightweight** plugin, the [default auto-complete-popup
 behavior](plugin/sacp.vim) provideed by this plugin only covers `.php`, `.txt`,
 `.markdown`, and `.go` files, for demonstration purpose.  If you have a good
 configuration to share, please send me a gist url or a your github repo url,
@@ -61,7 +62,7 @@ Press `<TAB>` to select the popup menu.
 	" 2. When the '.' is pressed, use smarter omnicomplete `<C-x><C-o>`, this
 	" works well with the vim-go plugin
 	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
-				\ { '=~': '\v[a-zA-Z]{4}$' , 'feedkeys': "\<C-x>\<C-o>"} ,
+				\ { '=~': '\v[a-zA-Z]{4}$' , 'feedkeys': "\<C-x>\<C-n>"} ,
 				\ { '=~': '\.$'            , 'feedkeys': "\<C-x>\<C-o>", "ignoreCompletionMode":1} ,
 				\ ]
 				\ })
@@ -73,6 +74,10 @@ with [vim-go](https://github.com/fatih/vim-go), see the
 details.
 
 Demo with [vim-go](https://github.com/fatih/vim-go)
+
+The demo looks ok. While SimpleAutoComplPop provide a slightly improved plugin
+key `<Plug>(sacp_cache_fuzzy_omnicomplete)`, it is based on the user's defined
+omnicomplete, but provide fuzzy complete feature.
 
 ![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/usage_go_demo.gif)
 
@@ -111,4 +116,31 @@ Demo with [vim-go](https://github.com/fatih/vim-go)
         '-', '_', '~', '^', '.', ',', ':', '!', '#', '=', '%', '$', '@', '<',
         '>', '/', ', '<Space>', '<C-h>', '<BS>']`. You may change this to add
         Russian characters, for example.
+
+
+
+## Advanced Features
+
+### `<Plug>(sacp_cache_fuzzy_omnicomplete)`
+
+Use the golang example before, I'll change the `\<C-x>\<C-o>` into
+`\<Plug>(sacp_cache_fuzzy_omnicomplete)`
+
+```
+	" 1. variables are all defined in current scope, use keyword from current
+	" buffer for completion `<C-x><C-n>`
+	" 2. When the '.' is pressed, use smarter omnicomplete `<C-x><C-o>`, this
+	" works well with the vim-go plugin
+	autocmd FileType go call sacp#enableForThisBuffer({ "matches": [
+				\ { '=~': '\v[a-zA-Z]{2}$' , 'feedkeys': "\<C-x>\<C-n>"} ,
+				\ { '=~': '\.$'            , 'feedkeys': "\<Plug>(sacp_cache_fuzzy_omnicomplete)", "ignoreCompletionMode":1} ,
+				\ ]
+				\ })
+```
+
+Type `http.ok`, then there goes the first hint `StatusOk`
+
+
+![go_demo](https://github.com/roxma/SimpleAutoComplPop.img/blob/master/advanced_go_demo.gif)
+
 
